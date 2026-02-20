@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,112 +17,198 @@ import {
   ShieldCheck,
   Sparkles,
   UserRoundCheck,
-  Video
+  Video,
+  type LucideIcon
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const capabilities = [
+type IconItem = {
+  title: string;
+  description: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+const quickStats = [
+  { value: "500+", label: "Actor personas", href: "/actors" },
+  { value: "26", label: "Language variants", href: "/#voices" },
+  { value: "24h", label: "Avg onboarding", href: "/license" }
+];
+
+const capabilityMetrics = [
+  { value: "4x", label: "faster setup", href: "/license" },
+  { value: "98%", label: "asset consistency", href: "/#actors" },
+  { value: "24/7", label: "catalog access", href: "/actors" }
+];
+
+const capabilities: IconItem[] = [
   {
     title: "Photoreal quality",
     description: "Studio-ready actor packs with consistent identity across campaigns.",
+    href: "/actors",
     icon: Sparkles
   },
   {
     title: "Voice preview built in",
     description: "Listen before licensing and match tone, language, and intent.",
+    href: "/#voices",
     icon: Mic2
   },
   {
     title: "Licensing-first workflow",
     description: "Clear rights, simple checkout, and clean handoff for production teams.",
+    href: "/#licensing",
     icon: FileCheck2
   }
+];
+
+const actorFilters = [
+  { label: "All", href: "/actors", active: true },
+  { label: "Female", href: "/actors?style=female" },
+  { label: "Male", href: "/actors?style=male" },
+  { label: "Style", href: "/actors", dropdown: true },
+  { label: "Age", href: "/actors", dropdown: true },
+  { label: "Ethnicity", href: "/actors", dropdown: true }
 ];
 
 const actors = [
   {
     name: "Lena",
     metaPrimary: "Female · 20s · Caucasian",
-    metaSecondary: "Confident English"
+    metaSecondary: "Confident English",
+    href: "/actors?q=Lena"
   },
   {
     name: "Maya",
     metaPrimary: "Female · 30s · South Asian",
-    metaSecondary: "Friendly English/Spanish"
+    metaSecondary: "Friendly English/Spanish",
+    href: "/actors?q=Maya"
   },
   {
     name: "Erik",
     metaPrimary: "Male · 30s · Caucasian",
-    metaSecondary: "Authoritative English/German"
+    metaSecondary: "Authoritative English/German",
+    href: "/actors?q=Erik"
   },
   {
     name: "Jared",
     metaPrimary: "Male · 30s · African American",
-    metaSecondary: "Warm English/French"
+    metaSecondary: "Warm English/French",
+    href: "/actors?q=Jared"
   },
   {
     name: "Daniel",
     metaPrimary: "Male · 40s · Caucasian",
-    metaSecondary: "Calm English"
+    metaSecondary: "Calm English",
+    href: "/actors?q=Daniel"
   }
 ];
 
-const useCases = [
+const demoContent = [
+  {
+    title: "Luxury Watch Launch",
+    type: "Paid Social Ad",
+    actor: "Maya",
+    result: "3.8% CTR uplift",
+    href: "/license"
+  },
+  {
+    title: "Fintech Product Explainer",
+    type: "Corporate Video",
+    actor: "Erik",
+    result: "42% watch-through",
+    href: "/license"
+  },
+  {
+    title: "Gaming Character Teaser",
+    type: "Game Promo",
+    actor: "Jared",
+    result: "Launch-ready in 2 days",
+    href: "/license"
+  },
+  {
+    title: "E-learning Onboarding",
+    type: "Training Module",
+    actor: "Lena",
+    result: "Localised to 3 languages",
+    href: "/license"
+  }
+];
+
+const useCases: Array<IconItem> = [
   {
     title: "Advertising",
-    subtitle: "Campaign launches with fast turnarounds",
+    description: "Campaign launches with fast turnarounds",
+    href: "/license",
     icon: Clapperboard
   },
   {
     title: "Corporate Video",
-    subtitle: "Consistent presenters for internal and external content",
+    description: "Consistent presenters for internal and external content",
+    href: "/license",
     icon: Video
   },
   {
     title: "Game Characters",
-    subtitle: "Persona concepts with ready-to-test visual style",
+    description: "Persona concepts with ready-to-test visual style",
+    href: "/license",
     icon: Gamepad2
   }
 ];
 
-const steps = [
+const steps: Array<IconItem> = [
   {
     title: "Select Talent",
     description: "Browse AI actors and shortlist by style, voice, and language fit.",
+    href: "/actors",
     icon: UserRoundCheck
   },
   {
     title: "Preview Voices",
     description: "Validate accent, pacing, and delivery before committing.",
+    href: "/#voices",
     icon: MessageSquareText
   },
   {
     title: "License Content",
     description: "Choose one-time usage or recurring access with clean terms.",
+    href: "/license",
     icon: ShieldCheck
   },
   {
     title: "Receive Files",
     description: "Move to production with asset-ready outputs.",
+    href: "/license/success",
     icon: Send
   }
 ];
 
-const logos = ["NEOAD", "GAME LOOP", "BYTE MEDIA", "LEARNCO", "PIXELFORGE", "ORBIT STUDIO"];
+const logos = [
+  { name: "NEOAD", href: "/#pricing" },
+  { name: "GAME LOOP", href: "/#pricing" },
+  { name: "BYTE MEDIA", href: "/#pricing" },
+  { name: "LEARNCO", href: "/#pricing" },
+  { name: "PIXELFORGE", href: "/#pricing" },
+  { name: "ORBIT STUDIO", href: "/#pricing" }
+];
 
-const differentiators = [
+const differentiators: Array<IconItem> = [
   {
     title: "Ready in minutes",
     description: "From actor discovery to rights activation without fragmented tools.",
+    href: "/license",
     icon: Rocket
   },
   {
     title: "Consistent across channels",
     description: "One persona package for paid ads, social content, landing pages and e-learning.",
+    href: "/#actors",
     icon: Layers3
   },
   {
     title: "Global content fit",
     description: "Multi-language actor profiles reduce market adaptation friction.",
+    href: "/#voices",
     icon: Globe2
   }
 ];
@@ -133,7 +220,8 @@ const plans = [
     period: "/month",
     description: "Great for solo creators and early campaigns",
     features: ["2 actors included", "60 voice minutes", "Commercial usage scope"],
-    highlighted: false
+    highlighted: false,
+    href: "/license"
   },
   {
     name: "Pro",
@@ -141,7 +229,8 @@ const plans = [
     period: "/month",
     description: "Best fit for agencies and content teams",
     features: ["10 actors included", "300 voice minutes", "Priority support + faster onboarding"],
-    highlighted: true
+    highlighted: true,
+    href: "/license"
   },
   {
     name: "Enterprise",
@@ -149,7 +238,8 @@ const plans = [
     period: "",
     description: "Tailored licensing for scale and custom rights",
     features: ["Custom actor capacity", "Flexible legal terms", "Dedicated success manager"],
-    highlighted: false
+    highlighted: false,
+    href: "/license"
   }
 ];
 
@@ -157,43 +247,72 @@ const comparisonRows = [
   {
     label: "Persona consistency",
     actorstock: "Unified profile and metadata",
-    diy: "Manual curation across tools"
+    diy: "Manual curation across tools",
+    href: "/#actors"
   },
   {
     label: "Voice + visual workflow",
     actorstock: "Built-in preview and packaging",
-    diy: "Fragmented and hard to validate"
+    diy: "Fragmented and hard to validate",
+    href: "/#voices"
   },
   {
     label: "Licensing clarity",
     actorstock: "Structured checkout and status flow",
-    diy: "Custom legal coordination each time"
+    diy: "Custom legal coordination each time",
+    href: "/#licensing"
   },
   {
     label: "Time to launch",
     actorstock: "Hours to days",
-    diy: "Days to weeks"
+    diy: "Days to weeks",
+    href: "/#pricing"
   }
 ];
 
 const faqs = [
   {
     question: "What exactly do we license?",
-    answer: "A complete AI actor package: visual identity assets, voice preview support, and rights-ready metadata."
+    answer: "A complete AI actor package: visual identity assets, voice preview support, and rights-ready metadata.",
+    href: "/license"
   },
   {
     question: "Do you support one-time and subscription models?",
-    answer: "Yes. Teams can use campaign-specific purchases or recurring plans for always-on production."
+    answer: "Yes. Teams can use campaign-specific purchases or recurring plans for always-on production.",
+    href: "/#pricing"
   },
   {
     question: "Can we start without selecting a specific actor?",
-    answer: "Yes. You can submit a general request and map a final actor profile later with your team."
+    answer: "Yes. You can submit a general request and map a final actor profile later with your team.",
+    href: "/license"
   },
   {
     question: "Is Stripe already connected?",
-    answer: "Current flow is MVP mock checkout with architecture prepared for Stripe integration."
+    answer: "Current flow is MVP mock checkout with architecture prepared for Stripe integration.",
+    href: "/#faq"
   }
 ];
+
+type LinkCardProps = {
+  href: string;
+  children: ReactNode;
+  className?: string;
+  prefetch?: boolean;
+  ariaLabel?: string;
+};
+
+function LinkCard({ href, children, className, prefetch, ariaLabel }: LinkCardProps) {
+  return (
+    <Link
+      href={href}
+      prefetch={prefetch}
+      aria-label={ariaLabel}
+      className={cn("block transition", className)}
+    >
+      {children}
+    </Link>
+  );
+}
 
 export default function HomePage() {
   return (
@@ -204,9 +323,12 @@ export default function HomePage() {
 
         <div className="relative grid gap-7 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/35 bg-fuchsia-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-fuchsia-200">
+            <LinkCard
+              href="/#actors"
+              className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/35 bg-fuchsia-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-fuchsia-200 hover:border-fuchsia-300/60"
+            >
               <BadgeCheck size={13} /> actorstock marketplace
-            </span>
+            </LinkCard>
 
             <h1 className="mt-5 max-w-2xl text-[2rem] font-semibold leading-[1.02] text-white sm:text-[2.6rem] lg:text-[3.4rem]">
               License AI Actors
@@ -237,18 +359,17 @@ export default function HomePage() {
             </div>
 
             <div className="mt-5 grid grid-cols-3 gap-2.5 sm:gap-3">
-              <div className="rounded-lg border border-slate-700 bg-[#121625] px-3 py-2">
-                <p className="text-lg font-semibold text-white sm:text-xl">500+</p>
-                <p className="text-[11px] text-slate-400">Actor personas</p>
-              </div>
-              <div className="rounded-lg border border-slate-700 bg-[#121625] px-3 py-2">
-                <p className="text-lg font-semibold text-white sm:text-xl">26</p>
-                <p className="text-[11px] text-slate-400">Language variants</p>
-              </div>
-              <div className="rounded-lg border border-slate-700 bg-[#121625] px-3 py-2">
-                <p className="text-lg font-semibold text-white sm:text-xl">24h</p>
-                <p className="text-[11px] text-slate-400">Avg onboarding</p>
-              </div>
+              {quickStats.map((item) => (
+                <LinkCard
+                  key={item.label}
+                  href={item.href}
+                  prefetch={false}
+                  className="rounded-lg border border-slate-700 bg-[#121625] px-3 py-2 hover:border-fuchsia-400/40 hover:bg-[#151b2c]"
+                >
+                  <p className="text-lg font-semibold text-white sm:text-xl">{item.value}</p>
+                  <p className="text-[11px] text-slate-400">{item.label}</p>
+                </LinkCard>
+              ))}
             </div>
           </div>
 
@@ -256,7 +377,12 @@ export default function HomePage() {
             <div className="absolute -left-8 top-10 h-28 w-28 rounded-full bg-fuchsia-500/25 blur-2xl" />
             <div className="absolute -right-8 bottom-14 h-32 w-32 rounded-full bg-pink-500/20 blur-2xl" />
 
-            <div className="relative overflow-hidden rounded-[1.5rem] border border-fuchsia-300/25 bg-[#141828] p-3 shadow-[0_24px_70px_rgba(0,0,0,0.45)]">
+            <LinkCard
+              href="/actors?q=Maya"
+              prefetch={false}
+              className="relative overflow-hidden rounded-[1.5rem] border border-fuchsia-300/25 bg-[#141828] p-3 shadow-[0_24px_70px_rgba(0,0,0,0.45)] hover:border-fuchsia-300/50"
+              ariaLabel="Open Maya profile"
+            >
               <div className="relative overflow-hidden rounded-[1.2rem] border border-slate-700 bg-[#1a1f30]">
                 <div className="aspect-[3/4] bg-[radial-gradient(circle_at_30%_20%,rgba(244,114,182,0.4),transparent_40%),radial-gradient(circle_at_75%_25%,rgba(168,85,247,0.3),transparent_45%),linear-gradient(180deg,#272c3e_0%,#171b2b_100%)]" />
                 <div className="absolute inset-x-4 bottom-4 rounded-xl border border-fuchsia-300/20 bg-[#0e1220]/90 px-4 py-2.5 text-xs text-slate-300 backdrop-blur">
@@ -264,21 +390,32 @@ export default function HomePage() {
                   <p>South Asian · 30s · Friendly English/Spanish</p>
                 </div>
               </div>
-            </div>
+            </LinkCard>
 
-            <div className="absolute -left-2 top-6 rounded-lg border border-fuchsia-400/30 bg-[#101524]/92 px-2.5 py-1.5 text-[11px] text-fuchsia-200">
+            <LinkCard
+              href="/actors?q=Maya"
+              prefetch={false}
+              className="absolute -left-2 top-6 rounded-lg border border-fuchsia-400/30 bg-[#101524]/92 px-2.5 py-1.5 text-[11px] text-fuchsia-200 hover:bg-[#17203a]"
+            >
               HD portrait pack
-            </div>
-            <div className="absolute -right-3 bottom-20 rounded-lg border border-fuchsia-400/30 bg-[#101524]/92 px-2.5 py-1.5 text-[11px] text-fuchsia-200">
+            </LinkCard>
+            <LinkCard
+              href="/#voices"
+              className="absolute -right-3 bottom-20 rounded-lg border border-fuchsia-400/30 bg-[#101524]/92 px-2.5 py-1.5 text-[11px] text-fuchsia-200 hover:bg-[#17203a]"
+            >
               Voice EN / ES
-            </div>
+            </LinkCard>
           </div>
         </div>
       </section>
 
       <section id="voices" className="reveal rounded-[1.6rem] border border-fuchsia-400/20 bg-[#0d1220]/92 p-5 sm:p-6 lg:p-7">
         <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-          <article className="rounded-xl border border-slate-700 bg-[linear-gradient(160deg,#151b2e_0%,#0d1220_100%)] p-5 sm:p-6">
+          <LinkCard
+            href="/license"
+            prefetch={false}
+            className="rounded-xl border border-slate-700 bg-[linear-gradient(160deg,#151b2e_0%,#0d1220_100%)] p-5 hover:border-fuchsia-400/40 sm:p-6"
+          >
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-fuchsia-300">Experience the platform</p>
             <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">Built for modern content teams</h2>
             <p className="mt-3 max-w-lg text-sm text-slate-300">
@@ -286,47 +423,49 @@ export default function HomePage() {
             </p>
 
             <div className="mt-5 grid grid-cols-3 gap-2.5 text-center">
-              <div className="rounded-lg border border-slate-700 bg-[#101626] px-2 py-2">
-                <p className="text-base font-semibold text-white sm:text-lg">4x</p>
-                <p className="text-[11px] text-slate-400">faster setup</p>
-              </div>
-              <div className="rounded-lg border border-slate-700 bg-[#101626] px-2 py-2">
-                <p className="text-base font-semibold text-white sm:text-lg">98%</p>
-                <p className="text-[11px] text-slate-400">asset consistency</p>
-              </div>
-              <div className="rounded-lg border border-slate-700 bg-[#101626] px-2 py-2">
-                <p className="text-base font-semibold text-white sm:text-lg">24/7</p>
-                <p className="text-[11px] text-slate-400">catalog access</p>
-              </div>
+              {capabilityMetrics.map((metric) => (
+                <span key={metric.label} className="rounded-lg border border-slate-700 bg-[#101626] px-2 py-2">
+                  <p className="text-base font-semibold text-white sm:text-lg">{metric.value}</p>
+                  <p className="text-[11px] text-slate-400">{metric.label}</p>
+                </span>
+              ))}
             </div>
-          </article>
+          </LinkCard>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             {capabilities.slice(0, 2).map((item) => {
               const Icon = item.icon;
               return (
-                <article
+                <LinkCard
                   key={item.title}
-                  className="rounded-xl border border-slate-700 bg-[#0f1321]/90 p-4 transition hover:border-fuchsia-400/40 hover:bg-[#13182a]"
+                  href={item.href}
+                  prefetch={item.href.startsWith("/") && !item.href.startsWith("/#") ? false : undefined}
+                  className="rounded-xl border border-slate-700 bg-[#0f1321]/90 p-4 hover:border-fuchsia-400/40 hover:bg-[#13182a]"
                 >
                   <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
                     <Icon size={16} />
                   </span>
                   <h3 className="mt-3 text-base font-semibold text-white">{item.title}</h3>
                   <p className="mt-1.5 text-xs text-slate-300 sm:text-sm">{item.description}</p>
-                </article>
+                </LinkCard>
               );
             })}
           </div>
         </div>
 
-        <article className="mt-3 rounded-xl border border-slate-700 bg-[#0f1321]/90 p-4 transition hover:border-fuchsia-400/40 hover:bg-[#13182a]">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
-            <FileCheck2 size={16} />
-          </span>
-          <h3 className="mt-3 text-base font-semibold text-white">{capabilities[2].title}</h3>
-          <p className="mt-1.5 text-xs text-slate-300 sm:text-sm">{capabilities[2].description}</p>
-        </article>
+        {capabilities[2] ? (
+          <LinkCard
+            href={capabilities[2].href}
+            prefetch={false}
+            className="mt-3 rounded-xl border border-slate-700 bg-[#0f1321]/90 p-4 hover:border-fuchsia-400/40 hover:bg-[#13182a]"
+          >
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
+              <FileCheck2 size={16} />
+            </span>
+            <h3 className="mt-3 text-base font-semibold text-white">{capabilities[2].title}</h3>
+            <p className="mt-1.5 text-xs text-slate-300 sm:text-sm">{capabilities[2].description}</p>
+          </LinkCard>
+        ) : null}
       </section>
 
       <section id="actors" className="reveal space-y-4 rounded-[1.8rem] border border-fuchsia-400/20 bg-[#0b0f1b]/92 p-5 sm:p-6">
@@ -349,17 +488,11 @@ export default function HomePage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-700 bg-[#101626] p-2">
-          {[
-            { label: "All", active: true },
-            { label: "Female" },
-            { label: "Male" },
-            { label: "Style", icon: true },
-            { label: "Age", icon: true },
-            { label: "Ethnicity", icon: true }
-          ].map((filter) => (
-            <button
+          {actorFilters.map((filter) => (
+            <Link
               key={filter.label}
-              type="button"
+              href={filter.href}
+              prefetch={false}
               className={`inline-flex h-8 items-center gap-1 rounded-md px-3 text-xs font-medium transition ${
                 filter.active
                   ? "bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white"
@@ -367,16 +500,19 @@ export default function HomePage() {
               }`}
             >
               {filter.label}
-              {filter.icon ? <ChevronDown size={13} /> : null}
-            </button>
+              {filter.dropdown ? <ChevronDown size={13} /> : null}
+            </Link>
           ))}
         </div>
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
           {actors.map((actor) => (
-            <article
+            <LinkCard
               key={actor.name}
-              className="group flex h-full flex-col rounded-xl border border-slate-700 bg-[#101424] p-3 transition hover:border-fuchsia-400/35"
+              href={actor.href}
+              prefetch={false}
+              ariaLabel={`Open ${actor.name} profile`}
+              className="group flex h-full flex-col rounded-xl border border-slate-700 bg-[#101424] p-3 hover:border-fuchsia-400/35"
             >
               <div className="relative mb-3 overflow-hidden rounded-lg border border-slate-700 bg-[#1a2032]">
                 <div className="aspect-[3/4] bg-[radial-gradient(circle_at_35%_20%,rgba(244,114,182,0.28),transparent_35%),linear-gradient(180deg,#2a2f43_0%,#1a1f31_100%)]" />
@@ -386,13 +522,39 @@ export default function HomePage() {
               <p className="mt-1 text-xs text-slate-300">{actor.metaPrimary}</p>
               <p className="text-xs text-slate-400">{actor.metaSecondary}</p>
 
-              <button
-                type="button"
-                className="mt-auto inline-flex h-9 items-center justify-center rounded-md bg-fuchsia-500/15 text-xs font-semibold text-fuchsia-100 transition hover:bg-fuchsia-500/25"
-              >
+              <span className="mt-auto inline-flex h-9 items-center justify-center rounded-md bg-fuchsia-500/15 text-xs font-semibold text-fuchsia-100 transition group-hover:bg-fuchsia-500/25">
                 View Profile
-              </button>
-            </article>
+              </span>
+            </LinkCard>
+          ))}
+        </div>
+      </section>
+
+      <section className="reveal rounded-[1.7rem] border border-fuchsia-400/20 bg-[#0d1220]/92 p-5 sm:p-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-fuchsia-300">Demo content</p>
+            <h2 className="mt-1 text-2xl font-semibold text-white sm:text-3xl">Ready-to-pitch sample scenarios</h2>
+          </div>
+          <Link href="/license" prefetch={false} className="text-sm font-medium text-fuchsia-200 hover:text-fuchsia-100">
+            Request your own demo pack
+          </Link>
+        </div>
+
+        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {demoContent.map((item) => (
+            <LinkCard
+              key={item.title}
+              href={item.href}
+              prefetch={false}
+              className="rounded-xl border border-slate-700 bg-[#101626] p-4 hover:border-fuchsia-400/35"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.13em] text-fuchsia-300">{item.type}</p>
+              <h3 className="mt-2 text-base font-semibold text-white">{item.title}</h3>
+              <p className="mt-2 text-xs text-slate-300">Actor: {item.actor}</p>
+              <p className="mt-1 text-xs text-slate-400">Result: {item.result}</p>
+              <span className="mt-4 inline-flex text-xs font-semibold text-fuchsia-200">Open demo brief</span>
+            </LinkCard>
           ))}
         </div>
       </section>
@@ -403,24 +565,24 @@ export default function HomePage() {
           <p className="mt-2 text-sm text-slate-300">One actor catalog, multiple production contexts and channels.</p>
 
           <ul className="mt-5 space-y-2.5 text-sm text-slate-200">
-            <li className="flex items-center gap-3 rounded-lg border border-slate-700 bg-[#121829] px-3 py-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
-                <Clapperboard size={15} />
-              </span>
-              Advertising campaigns
-            </li>
-            <li className="flex items-center gap-3 rounded-lg border border-slate-700 bg-[#121829] px-3 py-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
-                <Video size={15} />
-              </span>
-              Corporate and e-learning video
-            </li>
-            <li className="flex items-center gap-3 rounded-lg border border-slate-700 bg-[#121829] px-3 py-2">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
-                <Gamepad2 size={15} />
-              </span>
-              Game character prototyping
-            </li>
+            {[
+              { label: "Advertising campaigns", icon: Clapperboard, href: "/license" },
+              { label: "Corporate and e-learning video", icon: Video, href: "/license" },
+              { label: "Game character prototyping", icon: Gamepad2, href: "/license" }
+            ].map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  prefetch={false}
+                  className="flex items-center gap-3 rounded-lg border border-slate-700 bg-[#121829] px-3 py-2 transition hover:border-fuchsia-400/35"
+                >
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
+                    <item.icon size={15} />
+                  </span>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -428,7 +590,7 @@ export default function HomePage() {
           {useCases.map((item) => {
             const Icon = item.icon;
             return (
-              <article key={item.title} className="overflow-hidden rounded-xl border border-slate-700 bg-[#0f1321]">
+              <LinkCard key={item.title} href={item.href} prefetch={false} className="overflow-hidden rounded-xl border border-slate-700 bg-[#0f1321] hover:border-fuchsia-400/35">
                 <div className="relative border-b border-slate-700 bg-[#1a2032]">
                   <div className="aspect-[4/3] bg-[radial-gradient(circle_at_65%_20%,rgba(217,70,239,0.28),transparent_40%),linear-gradient(180deg,#2a2f44_0%,#1b2031_100%)]" />
                   <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-fuchsia-300/30 bg-[#101423]/90 text-fuchsia-200">
@@ -437,9 +599,9 @@ export default function HomePage() {
                 </div>
                 <div className="space-y-1 p-4">
                   <h3 className="text-base font-semibold text-white">{item.title}</h3>
-                  <p className="text-sm text-slate-300">{item.subtitle}</p>
+                  <p className="text-sm text-slate-300">{item.description}</p>
                 </div>
-              </article>
+              </LinkCard>
             );
           })}
         </div>
@@ -455,14 +617,14 @@ export default function HomePage() {
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <article key={step.title} className="rounded-xl border border-slate-700 bg-[#121829] p-4 text-center">
+              <LinkCard key={step.title} href={step.href} prefetch={false} className="rounded-xl border border-slate-700 bg-[#121829] p-4 text-center hover:border-fuchsia-400/35">
                 <span className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full border border-fuchsia-300/30 bg-fuchsia-500/10 text-fuchsia-200">
                   <Icon size={17} />
                 </span>
                 <p className="mt-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-fuchsia-300">Step {index + 1}</p>
                 <h3 className="mt-1 text-base font-semibold text-white">{step.title}</h3>
                 <p className="mt-1.5 text-sm text-slate-300">{step.description}</p>
-              </article>
+              </LinkCard>
             );
           })}
         </div>
@@ -471,12 +633,13 @@ export default function HomePage() {
           <p className="text-center text-sm text-slate-300">Trusted by leading brands & studios</p>
           <div className="mt-3 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             {logos.map((logo) => (
-              <div
-                key={logo}
-                className="rounded-md border border-slate-600 bg-[#111828] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-300"
+              <LinkCard
+                key={logo.name}
+                href={logo.href}
+                className="rounded-md border border-slate-600 bg-[#111828] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-300 hover:border-fuchsia-400/35"
               >
-                {logo}
-              </div>
+                {logo.name}
+              </LinkCard>
             ))}
           </div>
         </div>
@@ -492,16 +655,13 @@ export default function HomePage() {
           {differentiators.map((item) => {
             const Icon = item.icon;
             return (
-              <article
-                key={item.title}
-                className="rounded-xl border border-slate-700 bg-[#0f1321] p-5 transition hover:border-fuchsia-400/35"
-              >
+              <LinkCard key={item.title} href={item.href} className="rounded-xl border border-slate-700 bg-[#0f1321] p-5 hover:border-fuchsia-400/35">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-fuchsia-300/25 bg-fuchsia-500/10 text-fuchsia-200">
                   <Icon size={18} />
                 </span>
                 <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
                 <p className="mt-1.5 text-sm text-slate-300">{item.description}</p>
-              </article>
+              </LinkCard>
             );
           })}
         </div>
@@ -518,13 +678,15 @@ export default function HomePage() {
 
         <div className="grid gap-3 lg:grid-cols-3">
           {plans.map((plan) => (
-            <article
+            <LinkCard
               key={plan.name}
+              href={plan.href}
+              prefetch={false}
               className={`rounded-xl border p-5 ${
                 plan.highlighted
                   ? "border-fuchsia-300/50 bg-gradient-to-b from-fuchsia-500/20 to-[#141a2b]"
                   : "border-slate-700 bg-[#0f1424]"
-              }`}
+              } hover:border-fuchsia-300/65`}
             >
               {plan.highlighted ? (
                 <span className="inline-flex rounded-full border border-fuchsia-300/40 bg-fuchsia-500/20 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-fuchsia-100">
@@ -548,18 +710,16 @@ export default function HomePage() {
                 ))}
               </ul>
 
-              <Link
-                href="/license"
-                prefetch={false}
-                className={`mt-5 inline-flex h-10 w-full items-center justify-center rounded-md text-sm font-semibold transition ${
+              <span
+                className={`mt-5 inline-flex h-10 w-full items-center justify-center rounded-md text-sm font-semibold ${
                   plan.highlighted
-                    ? "bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white hover:from-fuchsia-400 hover:to-pink-400"
-                    : "border border-slate-600 bg-[#111728] text-slate-200 hover:border-fuchsia-300/40"
+                    ? "bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white"
+                    : "border border-slate-600 bg-[#111728] text-slate-200"
                 }`}
               >
                 Choose {plan.name}
-              </Link>
-            </article>
+              </span>
+            </LinkCard>
           ))}
         </div>
       </section>
@@ -573,24 +733,25 @@ export default function HomePage() {
           </div>
 
           {comparisonRows.map((row) => (
-            <div
+            <LinkCard
               key={row.label}
-              className="grid grid-cols-[1.4fr_1fr_1fr] border-b border-slate-800 px-4 py-4 text-sm last:border-b-0"
+              href={row.href}
+              className="grid grid-cols-[1.4fr_1fr_1fr] border-b border-slate-800 px-4 py-4 text-sm last:border-b-0 hover:bg-[#121a2d]"
             >
               <p className="text-slate-100">{row.label}</p>
               <p className="text-fuchsia-200">{row.actorstock}</p>
               <p className="text-slate-400">{row.diy}</p>
-            </div>
+            </LinkCard>
           ))}
         </div>
 
         <div className="space-y-3 p-4 md:hidden">
           {comparisonRows.map((row) => (
-            <article key={row.label} className="rounded-lg border border-slate-700 bg-[#121829] p-3">
+            <LinkCard key={row.label} href={row.href} className="rounded-lg border border-slate-700 bg-[#121829] p-3 hover:border-fuchsia-400/35">
               <h3 className="text-sm font-semibold text-white">{row.label}</h3>
               <p className="mt-2 text-xs text-fuchsia-200">Actorstock: {row.actorstock}</p>
               <p className="mt-1 text-xs text-slate-400">DIY: {row.diy}</p>
-            </article>
+            </LinkCard>
           ))}
         </div>
       </section>
@@ -606,6 +767,9 @@ export default function HomePage() {
             <details key={item.question} className="group rounded-lg border border-slate-700 bg-[#111829] px-4 py-3">
               <summary className="cursor-pointer list-none text-sm font-semibold text-white">{item.question}</summary>
               <p className="mt-2 text-sm text-slate-300">{item.answer}</p>
+              <Link href={item.href} prefetch={false} className="mt-2 inline-flex text-xs font-semibold text-fuchsia-200 hover:text-fuchsia-100">
+                Explore related demo
+              </Link>
             </details>
           ))}
         </div>
