@@ -11,6 +11,45 @@ export default async function ActorsPage({
 }: {
   searchParams: Record<string, string | string[] | undefined>;
 }) {
+  const demoActors = [
+    {
+      name: "Lena",
+      age: "18-25",
+      tags: "Lifestyle, Beauty",
+      lang: "EN"
+    },
+    {
+      name: "Maya",
+      age: "26-35",
+      tags: "Premium, Corporate",
+      lang: "EN / ES"
+    },
+    {
+      name: "Erik",
+      age: "26-35",
+      tags: "Tech, Finance",
+      lang: "EN / DE"
+    },
+    {
+      name: "Jared",
+      age: "26-35",
+      tags: "Gaming, Ads",
+      lang: "EN / FR"
+    },
+    {
+      name: "Daniel",
+      age: "36-45",
+      tags: "Narration, B2B",
+      lang: "EN"
+    },
+    {
+      name: "Nora",
+      age: "26-35",
+      tags: "E-learning, Startup",
+      lang: "EN / SK"
+    }
+  ];
+
   const filters = parseActorFilters(searchParams);
   const where = buildActorWhere(filters);
 
@@ -58,13 +97,26 @@ export default async function ActorsPage({
       </section>
 
       {dbUnavailable ? (
-        <section className="rounded-xl border border-slate-800 bg-slate-900/70 p-8 text-center text-slate-300">
-          <p className="font-semibold text-slate-100">Database is not running.</p>
-          <p className="mt-2 text-sm">Start PostgreSQL and seed demo data to browse actors.</p>
-          <div className="mt-4 space-y-1 text-xs text-slate-400">
-            <p>`npm run db:up`</p>
-            <p>`npm run prisma:migrate`</p>
-            <p>`npm run prisma:seed`</p>
+        <section className="space-y-4">
+          <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-8 text-center text-slate-300">
+            <p className="font-semibold text-slate-100">Live database is currently unavailable.</p>
+            <p className="mt-2 text-sm">
+              Showing demo actor cards below. Full filtering and actor detail routes reactivate once DATABASE_URL is
+              configured.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {demoActors.map((actor) => (
+              <article key={actor.name} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+                <div className="aspect-[3/4] rounded-lg border border-slate-700 bg-slate-800/80" />
+                <h3 className="mt-3 text-lg font-semibold text-white">{actor.name}</h3>
+                <p className="text-sm text-slate-300">Age: {actor.age}</p>
+                <p className="text-sm text-slate-400">Tags: {actor.tags}</p>
+                <p className="text-sm text-slate-400">Language: {actor.lang}</p>
+                <p className="mt-3 text-xs text-slate-500">Demo profile preview</p>
+              </article>
+            ))}
           </div>
         </section>
       ) : (

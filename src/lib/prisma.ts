@@ -16,9 +16,26 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export function isDatabaseConnectionError(error: unknown): boolean {
-  if (!(error instanceof Error)) {
+  if (!error || typeof error !== "object") {
     return false;
   }
 
-  return /can't reach database server|p1001|econnrefused|localhost:5432/i.test(error.message);
+  const err = error as { message?: string; name?: string };
+  const message = (err.message ?? "").toLowerCase();
+  const name = (err.name ?? "").toLowerCase();
+
+  if (name.includes("prismaclientinitializationerror")) {
+    return true;
+  }
+
+  return (
+    message.includes("can't reach database server") ||
+    message.includes("p1001") ||
+    message.includes("econnrefused") ||
+    message.includes("localhost:5432") ||
+    message.includes("environment variable `database_url`") ||
+    message.includes("you must provide a nonempty url") ||
+    message.includes("error validating datasource") ||
+    message.includes("error opening a tls connection")
+  );
 }
