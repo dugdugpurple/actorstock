@@ -19,19 +19,19 @@ export function SiteFooter() {
           </div>
 
           <div className="neo-footer-col">
-            <h4>Ecosystem</h4>
+            <h4>Marketplace</h4>
             <ul className="neo-footer-links">
               <li>
-                <Link href="/#catalog">Persona Catalog</Link>
+                <Link href="/actors">Browse Actors</Link>
               </li>
               <li>
-                <Link href="/#licensing">Licensing Tiers</Link>
+                <Link href="/pricing">Pricing Plans</Link>
               </li>
               <li>
-                <Link href="/license">Custom Training</Link>
+                <Link href="/#hiw">How It Works</Link>
               </li>
               <li>
-                <Link href="/actors">API Integration</Link>
+                <Link href="/#faq">FAQ</Link>
               </li>
             </ul>
           </div>
@@ -40,13 +40,13 @@ export function SiteFooter() {
             <h4>Legal</h4>
             <ul className="neo-footer-links">
               <li>
-                <Link href="/license">Ethics Charter</Link>
+                <Link href="/license">Licensing Terms</Link>
               </li>
               <li>
-                <Link href="/license">Privacy Protocol</Link>
+                <Link href="/license">Privacy Policy</Link>
               </li>
               <li>
-                <Link href="/license">Copyright AI</Link>
+                <Link href="/license">Creator Agreement</Link>
               </li>
               <li>
                 <Link href="/license">Terms of Use</Link>
@@ -55,8 +55,8 @@ export function SiteFooter() {
           </div>
 
           <div className="neo-footer-col neo-newsletter-box">
-            <h4>Intelligence</h4>
-            <p>Subscribe to receive neural engine updates.</p>
+            <h4>Stay Updated</h4>
+            <p>Get new actor drops and platform updates direct to your inbox.</p>
             <div className="neo-newsletter-form">
               <input type="email" placeholder="node@network.ai" aria-label="Email for updates" />
               <button type="button">Join</button>

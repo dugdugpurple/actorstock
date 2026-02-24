@@ -90,9 +90,9 @@ export default async function ActorsPage({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="container-shell space-y-6 py-8">
       <section>
-        <h1 className="font-[var(--font-heading)] text-3xl font-bold text-white">Browse AI Actors</h1>
+        <h1 className="text-3xl font-bold text-white">Browse AI Actors</h1>
         <p className="mt-1 text-slate-400">Filter by age, style, vibe, emotion and language.</p>
       </section>
 
@@ -108,7 +108,10 @@ export default async function ActorsPage({
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {demoActors.map((actor) => (
-              <article key={actor.name} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+              <article
+                key={actor.name}
+                className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-neon/40 hover:shadow-[0_0_20px_rgba(0,212,255,0.1)]"
+              >
                 <div className="aspect-[3/4] rounded-lg border border-slate-700 bg-slate-800/80" />
                 <h3 className="mt-3 text-lg font-semibold text-white">{actor.name}</h3>
                 <p className="text-sm text-slate-300">Age: {actor.age}</p>

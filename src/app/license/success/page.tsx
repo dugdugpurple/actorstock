@@ -36,6 +36,7 @@ export default async function LicenseSuccessPage({
   const active = order ? order.status === OrderStatus.PAID || order.status === OrderStatus.ACTIVE : false;
 
   return (
+    <div className="container-shell py-8">
     <Card className="mx-auto max-w-2xl">
       <CardHeader>
         <CardTitle>{active ? "Your license is active" : "Order received"}</CardTitle>
@@ -70,5 +71,6 @@ export default async function LicenseSuccessPage({
         </div>
       </CardContent>
     </Card>
+    </div>
   );
 }

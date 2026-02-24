@@ -22,7 +22,7 @@ export function ActorCard({ actor }: ActorCardProps) {
 
   return (
     <Link href={`/actors/${actor.id}`}>
-      <Card className="group overflow-hidden transition hover:-translate-y-1 hover:shadow-lg">
+      <Card className="group overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:border-neon/50 hover:shadow-[0_0_25px_rgba(200,146,42,0.18)]">
         <div className="relative aspect-[3/4] overflow-hidden bg-slate-900">
           <img
             src={actor.imageUrls[0]}

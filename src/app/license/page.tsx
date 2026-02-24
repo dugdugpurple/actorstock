@@ -60,7 +60,7 @@ export default async function LicensePage({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="container-shell space-y-6 py-8">
       <section>
         <h1 className="font-[var(--font-heading)] text-3xl font-bold text-white">License Checkout</h1>
         <p className="mt-1 text-slate-400">

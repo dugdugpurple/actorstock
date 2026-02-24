@@ -24,7 +24,7 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <div className="space-y-6">
+    <div className="container-shell space-y-6 py-8">
       <section>
         <h1 className="font-[var(--font-heading)] text-3xl font-bold text-white">Admin dashboard</h1>
         <p className="mt-1 text-slate-400">Manage actors, media, and license order statuses.</p>

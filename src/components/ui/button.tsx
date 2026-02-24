@@ -3,17 +3,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400/40",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-bold uppercase tracking-[0.04em] transition-all duration-300 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon/40",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white shadow-[0_10px_30px_rgba(192,38,211,0.38)] hover:brightness-110",
+          "bg-neon/[0.12] border border-neon text-white hover:bg-neon hover:text-black hover:shadow-[0_0_20px_rgba(0,212,255,0.6)]",
         outline:
-          "border border-slate-700 bg-slate-900/80 text-slate-100 hover:border-fuchsia-400/40 hover:bg-slate-800/85",
-        secondary: "bg-indigo-600 text-white hover:bg-indigo-500",
-        destructive: "bg-red-600 text-white hover:bg-red-500",
-        ghost: "text-slate-200 hover:bg-slate-800/70"
+          "border border-slate-700 bg-transparent text-slate-200 hover:border-neon hover:text-neon hover:bg-neon/[0.07]",
+        secondary:
+          "border border-slate-600 bg-slate-800/70 text-slate-200 hover:border-slate-500 hover:bg-slate-700/80",
+        destructive: "bg-red-600/80 border border-red-500 text-white hover:bg-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]",
+        ghost: "text-slate-300 hover:text-neon hover:bg-neon/[0.07]"
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -35,8 +35,7 @@ export function LogoutButton() {
   return (
     <Button
       size="sm"
-      variant="ghost"
-      className="border border-white/15 bg-white/5 text-slate-100 hover:bg-white/10 hover:text-white"
+      variant="outline"
       onClick={handleLogout}
       disabled={isLoading}
     >

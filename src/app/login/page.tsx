@@ -23,7 +23,7 @@ export default function LoginPage({
   const redirectTo = safeRedirectPath(searchParams.from);
 
   return (
-    <div className="space-y-6">
+    <div className="container-shell space-y-6 py-8">
       <section className="text-center">
         <h1 className="font-[var(--font-heading)] text-3xl font-bold text-white">Welcome back</h1>
         <p className="mt-1 text-slate-400">Login to manage licenses and access admin dashboard.</p>

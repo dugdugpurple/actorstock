@@ -55,7 +55,7 @@ export function ActorFilters({ filters }: ActorFiltersProps) {
               </Button>
               <a
                 href="/actors"
-                className="inline-flex h-10 items-center justify-center rounded-md border border-slate-700 px-3 text-sm font-medium text-slate-300 hover:bg-slate-900/80"
+                className="inline-flex h-10 items-center justify-center rounded-md border border-slate-700 bg-transparent px-3 text-xs font-bold uppercase tracking-[0.04em] text-slate-200 transition-all duration-300 hover:border-neon hover:text-neon hover:bg-neon/[0.07]"
               >
                 Reset
               </a>

@@ -33,7 +33,7 @@ export default async function AccountPage() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="container-shell space-y-6 py-8">
       <section className="flex items-end justify-between gap-4">
         <div>
           <h1 className="font-[var(--font-heading)] text-3xl font-bold text-white">My licenses</h1>

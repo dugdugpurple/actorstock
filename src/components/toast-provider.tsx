@@ -23,7 +23,7 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 function variantClass(variant: ToastVariant) {
   if (variant === "success") return "border-emerald-500/30 bg-emerald-500/15 text-emerald-100";
   if (variant === "error") return "border-red-500/30 bg-red-500/15 text-red-100";
-  return "border-slate-700 bg-slate-900/95 text-slate-100";
+  return "border-[#00d4ff]/30 bg-[#00d4ff]/10 text-slate-100";
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {

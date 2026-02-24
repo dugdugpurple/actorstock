@@ -2,15 +2,23 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { X } from "lucide-react";
+import { UserRole } from "@prisma/client";
+import { LogoutButton } from "@/components/logout-button";
+
+type Session = {
+  email: string;
+  role: UserRole;
+} | null;
 
 const navItems = [
-  { href: "/#demo", label: "Check Demo" },
-  { href: "/#catalog", label: "Catalog" },
-  { href: "/#vision", label: "Vision" },
-  { href: "/#licensing", label: "Licensing" }
+  { href: "/actors", label: "Browse" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/#how", label: "How It Works" },
+  { href: "/#faq", label: "FAQ" }
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ session }: { session: Session }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = () => setMenuOpen(false);
@@ -32,9 +40,30 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <Link href="/actors" prefetch={false} className="neo-btn-solid neo-nav-cta">
-            For creators
-          </Link>
+          <div className="neo-nav-auth">
+            {session ? (
+              <>
+                <Link href="/account" className="neo-nav-link">
+                  Account
+                </Link>
+                {session.role === "ADMIN" ? (
+                  <Link href="/admin" className="neo-nav-link">
+                    Admin
+                  </Link>
+                ) : null}
+                <LogoutButton />
+              </>
+            ) : (
+              <>
+                <Link href="/actors" prefetch={false} className="neo-nav-link">
+                  For creators
+                </Link>
+                <Link href="/login" prefetch={false} className="neo-btn-solid">
+                  Sign in
+                </Link>
+              </>
+            )}
+          </div>
 
           <button
             type="button"
@@ -52,14 +81,44 @@ export function SiteHeader() {
       </header>
 
       <div id="mobileMenu" className={`neo-mobile-overlay ${menuOpen ? "active" : ""}`}>
+        <button
+          type="button"
+          className="neo-mobile-close"
+          onClick={closeMenu}
+          aria-label="Close menu"
+        >
+          <X size={28} strokeWidth={1.8} />
+        </button>
+
         {navItems.map((item) => (
           <Link key={item.label} href={item.href} onClick={closeMenu}>
             {item.label}
           </Link>
         ))}
-        <Link href="/actors" prefetch={false} className="neo-btn-solid neo-mobile-cta" onClick={closeMenu}>
-          For Creators
-        </Link>
+        {session ? (
+          <>
+            <Link href="/account" onClick={closeMenu}>
+              Account
+            </Link>
+            {session.role === "ADMIN" ? (
+              <Link href="/admin" onClick={closeMenu}>
+                Admin
+              </Link>
+            ) : null}
+            <div className="neo-mobile-cta" onClick={closeMenu}>
+              <LogoutButton />
+            </div>
+          </>
+        ) : (
+          <>
+            <Link href="/actors" prefetch={false} onClick={closeMenu}>
+              For Creators
+            </Link>
+            <Link href="/login" prefetch={false} className="neo-btn-solid neo-mobile-cta" onClick={closeMenu}>
+              Sign In
+            </Link>
+          </>
+        )}
       </div>
     </>
   );

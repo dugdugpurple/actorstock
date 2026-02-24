@@ -58,7 +58,7 @@ export default async function ActorDetailPage({ params }: { params: { id: string
   ]);
 
   return (
-    <div className="space-y-8">
+    <div className="container-shell space-y-8 py-8">
       <section className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
         <div className="space-y-3">
           <div className="aspect-[4/5] overflow-hidden rounded-2xl border border-slate-800 bg-slate-900">
